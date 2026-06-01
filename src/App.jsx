@@ -384,9 +384,14 @@ function Header({ page, navigate }) {
       </div>
       <header className="header">
         <div className="container header-inner">
-          <button className="brand" type="button" onClick={() => navigate('home')} aria-label="Coscharis Group home">
-            <img src="/assets/coscharis-logo.svg" alt="Coscharis Group" />
-          </button>
+          <a href="/" className="brand">
+            <img
+              src="/images/logonew1.png"
+              width="120"
+              height="40"
+              alt="Coscharis Group"
+            />
+          </a>
           <nav className="main-nav" aria-label="Primary navigation">
             {navItems.map((item) => (
               <button
@@ -846,7 +851,7 @@ function Footer({ navigate }) {
       <div className="container footer-grid">
         <div>
           <button className="brand footer-brand" type="button" onClick={() => navigate('home')}>
-            <img src="/assets/coscharis-logo.svg" alt="Coscharis Group" />
+            <img src="/images/logonew1.png" alt="Coscharis Group" />
           </button>
           <p>Km 32, Lekki - Epe Expressway, Awoyaya, Lagos, Nigeria.</p>
           <p><strong>Opening Hours:</strong><br />Mon - Fri: 8:30 AM - 5:30 PM<br />Sat: 9:00 AM - 1:00 PM</p>
