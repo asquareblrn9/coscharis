@@ -10,7 +10,6 @@ import {
   Cpu,
   Cross,
   Droplets,
-  Facebook,
   Globe2,
   Handshake,
   HeartPulse,
@@ -32,7 +31,6 @@ import {
   Tractor,
   Users,
   Wrench,
-  Youtube,
 } from 'lucide-react';
 
 const iconMap = {
@@ -66,8 +64,6 @@ const iconMap = {
   phone: Phone,
   mail: Mail,
   mapPinned: MapPinned,
-  facebook: Facebook,
-  youtube: Youtube,
 };
 
 const navItems = [
@@ -317,6 +313,60 @@ function pageTitle(slug) {
   return titles[slug] || 'Home';
 }
 
+function IconCircle({ name, accent, className = 'mini-icon', size = 22 }) {
+  const Icon = iconMap[name] || Target;
+  return (
+    <span className={className} style={accent ? { '--accent': accent } : undefined}>
+      <Icon size={size} strokeWidth={2.2} />
+    </span>
+  );
+}
+
+function SocialIcons() {
+  return (
+    <div className="socials" aria-label="Social media links">
+      <span aria-label="LinkedIn"><LinkedinMark /></span>
+      <span aria-label="YouTube"><YoutubeMark /></span>
+      <span aria-label="Facebook"><FacebookMark /></span>
+    </div>
+  );
+}
+
+function LinkedinMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6.9 20.5H3.2V8.7h3.7v11.8ZM5.1 7.1A2.1 2.1 0 1 1 5.1 2.9a2.1 2.1 0 0 1 0 4.2Zm15.7 13.4h-3.7v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.8H9.3V8.7h3.5v1.6h.1c.5-.9 1.7-1.9 3.5-1.9 3.8 0 4.4 2.5 4.4 5.7v6.4Z" />
+    </svg>
+  );
+}
+
+function YoutubeMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21.4 7.1a3 3 0 0 0-2.1-2.1C17.4 4.5 12 4.5 12 4.5s-5.4 0-7.3.5a3 3 0 0 0-2.1 2.1A31.5 31.5 0 0 0 2.1 12a31.5 31.5 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.1c1.9.5 7.3.5 7.3.5s5.4 0 7.3-.5a3 3 0 0 0 2.1-2.1 31.5 31.5 0 0 0 .5-4.9 31.5 31.5 0 0 0-.5-4.9ZM10 15.5v-7l6 3.5-6 3.5Z" />
+    </svg>
+  );
+}
+
+function FacebookMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14.2 8.2V6.6c0-.8.5-1 1-1h2.4V2.2L14.3 2c-3.3 0-4.1 2-4.1 4.1v2.1H7.5V12h2.7v10h4V12h3.1l.5-3.8h-3.6Z" />
+    </svg>
+  );
+}
+
+function serviceIcon(service) {
+  if (/car|vehicle|sedan|suv|luxury|van|pickup|drive|rental|fleet|trade/i.test(service)) return 'automotive';
+  if (/health|medical|hospital|biomedical|diagnostic|training/i.test(service)) return 'stethoscope';
+  if (/water|yogurt|beverage/i.test(service)) return 'beverages';
+  if (/rice|farm|grain|hectare|cultivation|mechanisation|community/i.test(service)) return 'farms';
+  if (/paint|spray|refinish|collision|bumper|dent|scratch/i.test(service)) return 'paintRoller';
+  if (/parts|product|package|distribution|brand/i.test(service)) return 'package';
+  if (/support|technical/i.test(service)) return 'wrench';
+  return 'briefcase';
+}
+
 function Header({ page, navigate }) {
   return (
     <>
@@ -328,9 +378,7 @@ function Header({ page, navigate }) {
             <button type="button" onClick={() => navigate('investors')}>Investor Relations</button>
             <button type="button">Careers</button>
             <button type="button" onClick={() => navigate('contact')}>Contact Us</button>
-            <span>in</span>
-            <span>yt</span>
-            <span>f</span>
+            <SocialIcons />
           </div>
         </div>
       </div>
@@ -353,7 +401,7 @@ function Header({ page, navigate }) {
             ))}
           </nav>
           <div className="header-actions">
-            <button className="search-button" type="button" aria-label="Search">Q</button>
+            <button className="search-button" type="button" aria-label="Search"><Search size={22} /></button>
             <button className="btn primary" type="button" onClick={() => navigate('contact')}>Contact Us -&gt;</button>
           </div>
         </div>
@@ -380,7 +428,7 @@ function HomePage({ dark = false, navigate }) {
             <button className="company-card" key={company.slug} type="button" onClick={() => navigate(company.slug)}>
               <img src={company.image} alt="" />
               <div className="company-card-body">
-                <span className="company-icon" style={{ '--accent': company.color }}>{company.icon}</span>
+                <IconCircle name={company.icon} accent={company.color} className="company-icon" />
                 <div>
                   <h3>{company.name}</h3>
                   <p>{company.description}</p>
@@ -504,7 +552,7 @@ function CompanyPage({ company, navigate }) {
           <div className="feature-grid">
             {company.metrics.map((metric) => (
               <article className="feature-card" key={metric}>
-                <span className="mini-icon" style={{ '--accent': company.color }}>{company.icon}</span>
+                <IconCircle name={company.icon} accent={company.color} />
                 <h3>{metric}</h3>
               </article>
             ))}
@@ -516,7 +564,7 @@ function CompanyPage({ company, navigate }) {
         <div className="container service-grid">
           {company.services.map((service) => (
             <article className="service-card" key={service}>
-              <span className="mini-icon" style={{ '--accent': company.color }}>{company.icon}</span>
+              <IconCircle name={serviceIcon(service)} accent={company.color} />
               <h3>{service}</h3>
               <p>{serviceDescriptions[service] || 'Built around quality, reliability and responsive customer support.'}</p>
             </article>
@@ -604,7 +652,7 @@ function SustainabilityPage({ navigate }) {
           <div className="feature-grid">
             {['Environmental Stewardship', 'Social Responsibility', 'Ethical Governance & Integrity', 'Sustainable Growth'].map((item) => (
               <article className="feature-card" key={item}>
-                <span className="mini-icon">S</span>
+                <IconCircle name={item.includes('Environmental') ? 'leaf' : item.includes('Social') ? 'users' : item.includes('Governance') ? 'shield' : 'target'} />
                 <h3>{item}</h3>
                 <p>Building long-term value through responsible action.</p>
               </article>
@@ -721,9 +769,9 @@ function AboutStrip({ navigate }) {
 function StatsGrid({ compact = false }) {
   return (
     <div className={compact ? 'stats-grid compact' : 'stats-grid'}>
-      {stats.map(([number, label]) => (
+      {stats.map(([number, label, icon]) => (
         <article key={`${number}-${label}`} className="stat-card">
-          <span className="line-icon">{number[0]}</span>
+          <IconCircle name={icon} className="line-icon" size={24} />
           <strong>{number}</strong>
           <span>{label}</span>
         </article>
@@ -760,7 +808,7 @@ function Values() {
       <div className="container value-grid">
         {['Integrity', 'Innovation', 'People', 'Partnership', 'Excellence', 'Sustainability'].map((value) => (
           <article key={value}>
-            <span className="mini-icon">C</span>
+            <IconCircle name={value === 'Integrity' ? 'shield' : value === 'Innovation' ? 'technology' : value === 'People' ? 'users' : value === 'Partnership' ? 'partnership' : value === 'Sustainability' ? 'leaf' : 'target'} />
             <h3>{value}</h3>
             <p>We are committed to delivering quality, responsibility and superior value.</p>
           </article>
@@ -775,7 +823,7 @@ function Cta({ navigate }) {
     <section className="section cta-wrap">
       <div className="container cta">
         <div>
-          <span className="mini-icon">C</span>
+          <IconCircle name="partnership" />
           <h2>Partner with us for a future of sustainable growth and value creation.</h2>
         </div>
         <button className="btn primary" type="button" onClick={() => navigate('contact')}>Get in Touch -&gt;</button>
@@ -801,7 +849,7 @@ function Footer({ navigate }) {
         <div>
           <h3>Stay Connected</h3>
           <p>Follow us for the latest updates and announcements.</p>
-          <div className="socials"><span>in</span><span>yt</span><span>f</span></div>
+          <SocialIcons />
         </div>
       </div>
       <div className="container footer-bottom">
