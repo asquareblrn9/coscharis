@@ -109,38 +109,16 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   color: var(--navy);
   font-weight: 900;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-.brand-mark {
-  display: grid;
-  position: relative;
-  width: 48px;
-  height: 48px;
-  place-items: center;
-  border: 3px solid var(--red);
-  color: transparent;
-  font-weight: 900;
-  transform: rotate(45deg);
-}
-
-.brand-mark::after {
-  position: absolute;
-  color: var(--red);
-  content: "C";
-  transform: rotate(-45deg);
-}
-
-.brand-mark {
-  line-height: 1;
-}
-
-.brand-mark {
-  font-size: 1.2rem;
+.brand img {
+  display: block;
+  width: clamp(210px, 23vw, 330px);
+  height: auto;
 }
 
 .main-nav {
@@ -744,6 +722,12 @@ textarea {
 .footer h3,
 .footer .brand {
   color: var(--white);
+}
+
+.footer-brand {
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--white);
 }
 
 .footer button:not(.brand) {
