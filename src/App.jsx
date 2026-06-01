@@ -705,10 +705,10 @@ function ContactPage() {
           </form>
           <aside className="contact-info">
             <h2>Contact Information</h2>
-            <p><strong>Head Office</strong><br />Km 32, Lekki - Epe Expressway, Awoyaya, Lagos, Nigeria.</p>
-            <p><strong>Phone</strong><br />+234 1 4601700<br />+234 700 COSCHARIS (26724274)</p>
-            <p><strong>Email</strong><br />info@coscharisgroup.com</p>
-            <p><strong>Business Hours</strong><br />Monday - Friday: 8:30 AM - 5:30 PM<br />Saturday: 9:00 AM - 1:00 PM</p>
+            <ContactLine icon="mapPinned" title="Head Office">Km 32, Lekki - Epe Expressway, Awoyaya, Lagos, Nigeria.</ContactLine>
+            <ContactLine icon="phone" title="Phone">+234 1 4601700<br />+234 700 COSCHARIS (26724274)</ContactLine>
+            <ContactLine icon="mail" title="Email">info@coscharisgroup.com</ContactLine>
+            <ContactLine icon="clock" title="Business Hours">Monday - Friday: 8:30 AM - 5:30 PM<br />Saturday: 9:00 AM - 1:00 PM</ContactLine>
           </aside>
         </div>
       </section>
@@ -719,6 +719,15 @@ function ContactPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+function ContactLine({ icon, title, children }) {
+  return (
+    <div className="contact-line">
+      <IconCircle name={icon} />
+      <p><strong>{title}</strong><br />{children}</p>
+    </div>
   );
 }
 
